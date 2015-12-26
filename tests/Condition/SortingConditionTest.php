@@ -3,10 +3,11 @@
 namespace QueryObject\Tests\Condition;
 
 
+use QueryObject\Condition\ConditionInterface;
 use QueryObject\Condition\SortingCondition;
 use QueryObject\Condition\SortingDefinition;
 
-class SortingConditionTest extends \PHPUnit_Framework_TestCase
+class SortingConditionTest extends ConditionTest
 {
     /**
      * @var SortingCondition
@@ -19,6 +20,11 @@ class SortingConditionTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->object = new SortingCondition();
+    }
+
+    protected function createValidCondition()
+    {
+        return $this->object;
     }
 
     public function testCreation()

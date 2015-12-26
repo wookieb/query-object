@@ -2,10 +2,7 @@
 
 namespace QueryObject\Condition;
 
-
-use Assert\Assertion;
-
-class PhraseCondition
+class PhraseCondition implements ConditionInterface
 {
     const STARTS_WITH = 'starts-with';
     const ENDS_WITH = 'ends-with';
@@ -26,9 +23,9 @@ class PhraseCondition
     /**
      * PhraseCondition constructor.
      */
-    public function __construct($field, $phrase, $mode = self::CONTAINS)
+    private function __construct($field, $phrase, $mode)
     {
-        Assertion::notBlank($field, 'Field name cannot be blank');
+        ConditionsUtil::assertFieldName($field);
         $this->field = $field;
         $this->phrase = $phrase;
         $this->mode = $mode;
@@ -71,5 +68,35 @@ class PhraseCondition
     public function isContainsMode()
     {
         return $this->mode === self::CONTAINS;
+    }
+
+    /**
+     * @param string $fieldName
+     * @param string $phrase
+     * @return PhraseCondition
+     */
+    public static function contains($fieldName, $phrase)
+    {
+        return new self($fieldName, $phrase, self::CONTAINS);
+    }
+
+    /**
+     * @param string $fieldName
+     * @param string $phrase
+     * @return PhraseCondition
+     */
+    public static function startsWith($fieldName, $phrase)
+    {
+        return new self($fieldName, $phrase, self::STARTS_WITH);
+    }
+
+    /**
+     * @param string $fieldName
+     * @param string $phrase
+     * @return PhraseCondition
+     */
+    public static function endsWith($fieldName, $phrase)
+    {
+        return new self($fieldName, $phrase, self::ENDS_WITH);
     }
 }

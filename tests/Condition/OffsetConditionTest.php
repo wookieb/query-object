@@ -3,10 +3,16 @@
 namespace QueryObject\Tests\Condition;
 
 
+use QueryObject\Condition\ConditionInterface;
 use QueryObject\Condition\OffsetCondition;
 
-class OffsetConditionTest extends \PHPUnit_Framework_TestCase
+class OffsetConditionTest extends ConditionTest
 {
+    protected function createValidCondition()
+    {
+        return new OffsetCondition(100);
+    }
+
     public function testCreation()
     {
         $offset = 100;

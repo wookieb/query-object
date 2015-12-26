@@ -2,9 +2,6 @@
 
 namespace QueryObject\Condition;
 
-
-use Assert\Assertion;
-
 class SortingDefinition
 {
     const ASC = 'asc';
@@ -20,7 +17,7 @@ class SortingDefinition
 
     public function __construct($field, $direction = 'asc')
     {
-        Assertion::notBlank($field, 'Sorting field cannot be blank');
+        ConditionsUtil::assertFieldName($field);
         $this->field = $field;
 
         $direction = strtolower($direction);

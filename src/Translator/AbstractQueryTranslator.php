@@ -26,7 +26,7 @@ abstract class AbstractQueryTranslator implements QueryTranslatorInterface
 
     protected function init()
     {
-
+        
     }
 
     /**

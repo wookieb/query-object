@@ -2,7 +2,6 @@
 
 namespace QueryObject\Condition;
 
-
 use Assert\Assertion;
 
 class LimitCondition implements ConditionInterface

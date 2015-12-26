@@ -25,7 +25,7 @@ class QueryTranslatorEvent extends Event
      */
     private $condition;
 
-    public function __construct(Query $query, ConditionInterface $condition = false)
+    public function __construct(Query $query, ConditionInterface $condition = null)
     {
         $this->query = $query;
         $this->condition = $condition;

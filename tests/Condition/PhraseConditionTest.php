@@ -3,16 +3,22 @@
 namespace QueryObject\Tests\Condition;
 
 
+use QueryObject\Condition\ConditionInterface;
 use QueryObject\Condition\PhraseCondition;
 
-class PhraseConditionTest extends \PHPUnit_Framework_TestCase
+class PhraseConditionTest extends ConditionTest
 {
     const FIELD = 'field-name';
     const PHRASE = 'phrase';
 
+    protected function createValidCondition()
+    {
+        return PhraseCondition::contains(self::FIELD, self::PHRASE);
+    }
+
     public function testCreationOfFieldContains()
     {
-        $object = new PhraseCondition(self::FIELD, self::PHRASE);
+        $object = PhraseCondition::contains(self::FIELD, self::PHRASE);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::PHRASE, $object->getPhrase());
         $this->assertSame(PhraseCondition::CONTAINS, $object->getMode());
@@ -23,7 +29,7 @@ class PhraseConditionTest extends \PHPUnit_Framework_TestCase
 
     public function testCreationOfFieldStartsWith()
     {
-        $object = new PhraseCondition(self::FIELD, self::PHRASE, PhraseCondition::STARTS_WITH);
+        $object = PhraseCondition::startsWith(self::FIELD, self::PHRASE);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::PHRASE, $object->getPhrase());
         $this->assertSame(PhraseCondition::STARTS_WITH, $object->getMode());
@@ -34,7 +40,7 @@ class PhraseConditionTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateOfFieldEndsWith()
     {
-        $object = new PhraseCondition(self::FIELD, self::PHRASE, PhraseCondition::ENDS_WITH);
+        $object = PhraseCondition::endsWith(self::FIELD, self::PHRASE);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::PHRASE, $object->getPhrase());
         $this->assertSame(PhraseCondition::ENDS_WITH, $object->getMode());
@@ -43,13 +49,11 @@ class PhraseConditionTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($object->isStartWithMode());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Field name cannot be blank
-     */
+
     public function testThrowsAnExceptionIfFieldNameIsBlank()
     {
-        new PhraseCondition('  ', self::PHRASE);
+        $this->runTestFieldNotBlank(function () {
+            PhraseCondition::contains('   ', self::PHRASE);
+        });
     }
-
 }

@@ -2,11 +2,15 @@
 
 namespace QueryObject\Tests\Condition;
 
-
 use QueryObject\Condition\LimitCondition;
 
-class LimitConditionTest extends \PHPUnit_Framework_TestCase
+class LimitConditionTest extends ConditionTest
 {
+    protected function createValidCondition()
+    {
+        return new LimitCondition(100);
+    }
+
     public function testCreation()
     {
         $limit = 100;

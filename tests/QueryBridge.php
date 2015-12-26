@@ -12,7 +12,7 @@ use QueryObject\Traits\SortingQueryTrait;
 
 class QueryBridge extends Query
 {
-    use LimitQueryTrait, OffsetQueryTrait, SortingQueryTrait, IdentifierQueryTrait;
+    use LimitQueryTrait, OffsetQueryTrait, SortingQueryTrait;
 
     public function addCondition(ConditionInterface $condition, $name = null)
     {
