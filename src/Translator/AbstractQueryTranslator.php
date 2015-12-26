@@ -11,7 +11,7 @@ use QueryObject\Translator\Exception\QueryTranslationException;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-abstract class AbstractQueryTranslator
+abstract class AbstractQueryTranslator implements QueryTranslatorInterface
 {
     /**
      * @var EventDispatcherInterface
