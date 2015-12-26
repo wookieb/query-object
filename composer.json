@@ -1,0 +1,30 @@
+{
+  "name": "wookieb/query-object",
+  "description": "Helper for building query objects",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+	{
+	  "name": "Łukasz Kużyński 'wookieb'",
+	  "email": "lukasz.kuzynski@gmail.com"
+	}
+  ],
+  "autoload": {
+	"psr-4": {
+	  "QueryObject\\": "src/"
+	}
+  },
+  "autoload-dev": {
+	"psr-4": {
+	  "QueryObject\\Tests\\": "tests/"
+	}
+  },
+  "minimum-stability": "stable",
+  "require": {
+	"beberlei/assert": "2.*",
+	"phpoption/phpoption": "1.*"
+  },
+  "require-dev": {
+	"phpunit/phpunit": "5.1.*"
+  }
+}
