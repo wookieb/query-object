@@ -26,6 +26,7 @@ class SimpleOperatorConditionTest extends ConditionTest
         $object = SimpleOperatorCondition::equals(self::FIELD, self::VALUE);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::VALUE, $object->getValue());
+        $this->assertSame(SimpleOperatorCondition::EQUAL, $object->getOperator());
         $this->assertTrue($object->isEqual());
         $this->assertFalse($object->isNotEqual());
         $this->assertFalse($object->isGreaterThan());
@@ -39,6 +40,7 @@ class SimpleOperatorConditionTest extends ConditionTest
         $object = SimpleOperatorCondition::notEqual(self::FIELD, self::VALUE);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::VALUE, $object->getValue());
+        $this->assertSame(SimpleOperatorCondition::NOT_EQUAL, $object->getOperator());
         $this->assertFalse($object->isEqual());
         $this->assertTrue($object->isNotEqual());
         $this->assertFalse($object->isGreaterThan());
@@ -52,6 +54,7 @@ class SimpleOperatorConditionTest extends ConditionTest
         $object = SimpleOperatorCondition::greaterThan(self::FIELD, self::VALUE);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::VALUE, $object->getValue());
+        $this->assertSame(SimpleOperatorCondition::GREATER_THAN, $object->getOperator());
         $this->assertFalse($object->isEqual());
         $this->assertTrue($object->isGreaterThan());
         $this->assertFalse($object->isGreaterThanOrEqual());
@@ -64,6 +67,7 @@ class SimpleOperatorConditionTest extends ConditionTest
         $object = SimpleOperatorCondition::greaterThanOrEqual(self::FIELD, self::VALUE);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::VALUE, $object->getValue());
+        $this->assertSame(SimpleOperatorCondition::GREATER_THAN_OR_EQUAL, $object->getOperator());
         $this->assertFalse($object->isEqual());
         $this->assertFalse($object->isNotEqual());
         $this->assertFalse($object->isGreaterThan());
@@ -77,6 +81,7 @@ class SimpleOperatorConditionTest extends ConditionTest
         $object = SimpleOperatorCondition::lessThan(self::FIELD, self::VALUE);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::VALUE, $object->getValue());
+        $this->assertSame(SimpleOperatorCondition::LESS_THAN, $object->getOperator());
         $this->assertFalse($object->isEqual());
         $this->assertFalse($object->isNotEqual());
         $this->assertFalse($object->isGreaterThan());
@@ -90,6 +95,7 @@ class SimpleOperatorConditionTest extends ConditionTest
         $object = SimpleOperatorCondition::lessThanOrEqual(self::FIELD, self::VALUE);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::VALUE, $object->getValue());
+        $this->assertSame(SimpleOperatorCondition::LESS_THAN_OR_EQUAL, $object->getOperator());
         $this->assertFalse($object->isEqual());
         $this->assertFalse($object->isNotEqual());
         $this->assertFalse($object->isGreaterThan());

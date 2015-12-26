@@ -12,15 +12,15 @@ class SimpleOperatorCondition implements ConditionInterface
     const LESS_THAN_OR_EQUAL = 'less-than-or-equal';
 
     /**
-     * @var
+     * @var string
      */
     private $field;
     /**
-     * @var
+     * @var mixed
      */
     private $value;
     /**
-     * @var
+     * @var string
      */
     private $operator;
 
@@ -52,6 +52,14 @@ class SimpleOperatorCondition implements ConditionInterface
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOperator()
+    {
+        return $this->operator;
     }
 
     /**
