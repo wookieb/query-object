@@ -41,14 +41,14 @@ abstract class AbstractQueryTranslator implements QueryTranslatorInterface
     {
         $event = $this->createTranslateConditionEvent($query, $condition);
         $this->eventDispatcher->dispatch(
-            ConditionQueryTranslatorQuery::TRANSLATE_CONDITION,
+            QueryTranslatorEvent::TRANSLATE_CONDITION,
             $event
         );
 
         if (!$event->isHandled()) {
             $msg = sprintf(
                 'Could not translate query condition of class. None of %s listeners was able to translate it.',
-                get_class($condition), ConditionQueryTranslatorQuery::TRANSLATE_CONDITION
+                get_class($condition), QueryTranslatorEvent::TRANSLATE_CONDITION
             );
             throw new QueryTranslationException($msg);
         }
@@ -56,7 +56,7 @@ abstract class AbstractQueryTranslator implements QueryTranslatorInterface
 
     protected function createTranslateConditionEvent(Query $query, ConditionInterface $condition)
     {
-        return new ConditionQueryTranslatorQuery($query, $condition);
+        return new QueryTranslatorEvent($query, $condition);
     }
 
     protected function translateQuery(Query $query)
@@ -70,7 +70,7 @@ abstract class AbstractQueryTranslator implements QueryTranslatorInterface
         if (!$event->isHandled()) {
             $msg = sprintf(
                 'Could not translate query. None of %s listeners was able to translate it',
-                ConditionQueryTranslatorQuery::TRANSLATE_CONDITION
+                QueryTranslatorEvent::TRANSLATE_QUERY
             );
             throw new QueryTranslationException($msg);
         }
