@@ -15,8 +15,8 @@ class LimitCondition implements ConditionInterface
 
     public function __construct($limit)
     {
-        Assertion::integer($limit, null, 'LimitQueryTrait');
-        Assertion::greaterThan($limit, 0, null, 'LimitQueryTrait');
+        $limit = (int)$limit;
+        Assertion::greaterThan($limit, 0, 'Limit must be greater than 0');
         $this->limit = $limit;
     }
 

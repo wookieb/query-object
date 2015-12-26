@@ -14,7 +14,8 @@ class OffsetCondition implements ConditionInterface
 
     public function __construct($offset)
     {
-        Assertion::integer($offset, null, 'OffsetQueryTrait');
+        $offset = (int)$offset;
+        Assertion::greaterOrEqualThan($offset, 0, 'Offset cannot be lower than 0');
         $this->offset = $offset;
     }
 

@@ -20,7 +20,7 @@ class SortingDefinition
 
     public function __construct($field, $direction = 'asc')
     {
-        Assertion::notBlank($field, 'SortingQueryTrait field cannot be blank');
+        Assertion::notBlank($field, 'Sorting field cannot be blank');
         $this->field = $field;
 
         $direction = strtolower($direction);
@@ -44,5 +44,15 @@ class SortingDefinition
     public function getDirection()
     {
         return $this->direction;
+    }
+
+    public function isAscending()
+    {
+        return $this->direction === self::ASC;
+    }
+
+    public function isDescending()
+    {
+        return $this->direction === self::DESC;
     }
 }

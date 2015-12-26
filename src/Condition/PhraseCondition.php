@@ -28,7 +28,7 @@ class PhraseCondition
      */
     public function __construct($field, $phrase, $mode = self::CONTAINS)
     {
-        Assertion::notBlank($field, null, 'column');
+        Assertion::notBlank($field, 'Field name cannot be blank');
         $this->field = $field;
         $this->phrase = $phrase;
         $this->mode = $mode;
@@ -68,7 +68,7 @@ class PhraseCondition
         return $this->mode === self::ENDS_WITH;
     }
 
-    public function isContainsMOde()
+    public function isContainsMode()
     {
         return $this->mode === self::CONTAINS;
     }

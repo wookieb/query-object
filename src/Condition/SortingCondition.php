@@ -14,7 +14,11 @@ class SortingCondition implements ConditionInterface
 
     public function __construct($sorting = [])
     {
-        Assertion::allIsInstanceOf($sorting, 'QueryObject\Condition\SortingDefinition');
+        Assertion::allIsInstanceOf(
+            $sorting,
+            'QueryObject\Condition\SortingDefinition',
+            'Provided sorting must be an array of QueryObject\Condition\SortingDefinition'
+        );
         $this->sorting = $sorting;
     }
 
@@ -26,6 +30,11 @@ class SortingCondition implements ConditionInterface
         return $this->sorting;
     }
 
+    /**
+     * @param string|SortingDefinition $field field name or instance of SortingDefinition
+     * @param string $order ignored id field is an instance of SortingDefinition
+     * @param null $position
+     */
     public function sortBy($field, $order, $position = null)
     {
         if ($field instanceof SortingDefinition) {

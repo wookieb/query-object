@@ -14,7 +14,7 @@ class EqualsConditionTest extends \PHPUnit_Framework_TestCase
         $object = new EqualsCondition($field, $value);
 
         $this->assertSame($object->getField(), $field);
-        $this->assertSame($object->getField(), $value);
+        $this->assertSame($object->getValue(), $value);
     }
 
     /**
