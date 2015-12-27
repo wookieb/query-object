@@ -4,10 +4,9 @@ namespace QueryObject\Tests\Traits;
 
 
 use QueryObject\Condition\LimitCondition;
-use QueryObject\Condition\OffsetCondition;
 use QueryObject\Tests\TestResources\QueryBridge;
 
-class OffsetQueryTraitTest extends \PHPUnit_Framework_TestCase
+class LimitQueryTraitTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var QueryBridge
@@ -21,14 +20,14 @@ class OffsetQueryTraitTest extends \PHPUnit_Framework_TestCase
 
     public function testSetting()
     {
-        $result = $this->object->offset(100);
+        $result = $this->object->limit(100);
         $this->assertSame($this->object, $result);
-        $this->assertContains(new OffsetCondition(100), $this->object->getConditions(), '', false, false);
+        $this->assertContains(new LimitCondition(100), $this->object->getConditions(), '', false, false);
     }
 
     public function testGetting()
     {
-        $this->object->offset(100);
-        $this->assertSame(100, $this->object->getOffset());
+        $this->object->limit(100);
+        $this->assertSame(100, $this->object->getLimit());
     }
 }

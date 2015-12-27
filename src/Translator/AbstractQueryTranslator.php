@@ -5,7 +5,6 @@ namespace QueryObject\Translator;
 
 use QueryObject\Condition\ConditionInterface;
 use QueryObject\Query;
-use QueryObject\Translator\Event\ConditionQueryTranslatorQuery;
 use QueryObject\Translator\Event\QueryTranslatorEvent;
 use QueryObject\Translator\Exception\QueryTranslationException;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -26,7 +25,7 @@ abstract class AbstractQueryTranslator implements QueryTranslatorInterface
 
     protected function init()
     {
-        
+
     }
 
     /**
@@ -47,7 +46,7 @@ abstract class AbstractQueryTranslator implements QueryTranslatorInterface
 
         if (!$event->isHandled()) {
             $msg = sprintf(
-                'Could not translate query condition of class. None of %s listeners was able to translate it.',
+                'Could not translate query condition of class %s. None of %s listeners was able to translate it.',
                 get_class($condition), QueryTranslatorEvent::TRANSLATE_CONDITION
             );
             throw new QueryTranslationException($msg);
@@ -67,12 +66,8 @@ abstract class AbstractQueryTranslator implements QueryTranslatorInterface
             $event
         );
 
-        if (!$event->isHandled()) {
-            $msg = sprintf(
-                'Could not translate query. None of %s listeners was able to translate it',
-                QueryTranslatorEvent::TRANSLATE_QUERY
-            );
-            throw new QueryTranslationException($msg);
+        if ($event->isHandled()) {
+            return true;
         }
     }
 
@@ -83,9 +78,10 @@ abstract class AbstractQueryTranslator implements QueryTranslatorInterface
 
     protected function runTranslation(Query $query)
     {
-        $this->translateQuery($query);
-        foreach ($query->getConditions() as $condition) {
-            $this->translateCondition($query, $condition);
+        if (!$this->translateQuery($query)) {
+            foreach ($query->getConditions() as $condition) {
+                $this->translateCondition($query, $condition);
+            }
         }
     }
 }

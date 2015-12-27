@@ -26,14 +26,14 @@ trait SortingQueryTrait
 
     /**
      * @param string|SortingDefinition $field
-     * @param string $value asc or desc
+     * @param string $direction asc or desc
      * @param integer $position put sorting at given position
      * @return $this
      */
-    public function sortBy($field, $value, $position = null)
+    public function sortBy($field, $direction, $position = null)
     {
         $this->__getSortingCondition()
-            ->sortBy($field, $value, $position);
+            ->sortBy($field, $direction, $position);
         return $this;
     }
 

@@ -55,17 +55,17 @@ class PhraseCondition implements ConditionInterface
         return $this->mode;
     }
 
-    public function isStartWithMode()
+    public function isStartWith()
     {
         return $this->mode === self::STARTS_WITH;
     }
 
-    public function isEndWithMode()
+    public function isEndWith()
     {
         return $this->mode === self::ENDS_WITH;
     }
 
-    public function isContainsMode()
+    public function isContains()
     {
         return $this->mode === self::CONTAINS;
     }

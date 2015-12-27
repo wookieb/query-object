@@ -1,6 +1,6 @@
 <?php
 
-namespace QueryObject\Tests;
+namespace QueryObject\Tests\TestResources;
 
 
 use QueryObject\Condition\ConditionInterface;
@@ -16,7 +16,7 @@ class QueryBridge extends Query
 
     public function addCondition(ConditionInterface $condition, $name = null)
     {
-        return parent::addCondition($condition, $name);
+        parent::addCondition($condition, $name);
     }
 
     public function getConditionByName($name)
@@ -26,6 +26,6 @@ class QueryBridge extends Query
 
     public function removeConditionByName($name)
     {
-        return parent::removeConditionByName($name);
+        parent::removeConditionByName($name);
     }
 }

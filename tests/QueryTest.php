@@ -5,6 +5,7 @@ namespace QueryObject\Tests;
 use PhpOption\None;
 use PhpOption\Some;
 use QueryObject\Condition\ConditionInterface;
+use QueryObject\Tests\TestResources\QueryBridge;
 
 class QueryTest extends \PHPUnit_Framework_TestCase
 {

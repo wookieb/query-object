@@ -109,7 +109,7 @@ class Conditions
      * @param string $field
      * @return DefinedCondition
      */
-    public static function isDefined($field)
+    public static function defined($field)
     {
         return DefinedCondition::defined($field);
     }
@@ -118,7 +118,7 @@ class Conditions
      * @param string $field
      * @return DefinedCondition
      */
-    public static function isNotDefined($field)
+    public static function notDefined($field)
     {
         return DefinedCondition::notDefined($field);
     }

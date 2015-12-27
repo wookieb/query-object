@@ -17,10 +17,6 @@ class QueryTranslatorEvent extends Event
     private $query;
 
     /**
-     * @var bool
-     */
-    private $handled = false;
-    /**
      * @var ConditionInterface
      */
     private $condition;
@@ -49,11 +45,11 @@ class QueryTranslatorEvent extends Event
 
     public function markAsHandled()
     {
-        $this->handled = true;
+        $this->stopPropagation();
     }
 
     public function isHandled()
     {
-        return $this->handled;
+        return $this->isPropagationStopped();
     }
 }

@@ -22,9 +22,9 @@ class PhraseConditionTest extends ConditionTest
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::PHRASE, $object->getPhrase());
         $this->assertSame(PhraseCondition::CONTAINS, $object->getMode());
-        $this->assertTrue($object->isContainsMode());
-        $this->assertFalse($object->isEndWithMode());
-        $this->assertFalse($object->isStartWithMode());
+        $this->assertTrue($object->isContains());
+        $this->assertFalse($object->isEndWith());
+        $this->assertFalse($object->isStartWith());
     }
 
     public function testCreationOfFieldStartsWith()
@@ -33,9 +33,9 @@ class PhraseConditionTest extends ConditionTest
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::PHRASE, $object->getPhrase());
         $this->assertSame(PhraseCondition::STARTS_WITH, $object->getMode());
-        $this->assertFalse($object->isContainsMode());
-        $this->assertFalse($object->isEndWithMode());
-        $this->assertTrue($object->isStartWithMode());
+        $this->assertFalse($object->isContains());
+        $this->assertFalse($object->isEndWith());
+        $this->assertTrue($object->isStartWith());
     }
 
     public function testCreateOfFieldEndsWith()
@@ -44,9 +44,9 @@ class PhraseConditionTest extends ConditionTest
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::PHRASE, $object->getPhrase());
         $this->assertSame(PhraseCondition::ENDS_WITH, $object->getMode());
-        $this->assertFalse($object->isContainsMode());
-        $this->assertTrue($object->isEndWithMode());
-        $this->assertFalse($object->isStartWithMode());
+        $this->assertFalse($object->isContains());
+        $this->assertTrue($object->isEndWith());
+        $this->assertFalse($object->isStartWith());
     }
 
 
