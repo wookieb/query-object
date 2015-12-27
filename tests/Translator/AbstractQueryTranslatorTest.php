@@ -8,7 +8,6 @@ use QueryObject\Query;
 use QueryObject\Tests\TestResources\QueryBridge;
 use QueryObject\Tests\TestResources\QueryTranslatorBridge;
 use QueryObject\Translator\Event\QueryTranslatorEvent;
-use QueryObject\Translator\Exception\QueryTranslationException;
 
 class AbstractQueryTranslatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -55,6 +54,12 @@ class AbstractQueryTranslatorTest extends \PHPUnit_Framework_TestCase
         $this->query = new QueryBridge();
         $this->query->addCondition($this->condition1);
         $this->query->addCondition($this->condition2);
+    }
+
+    public function testClassHierarchy()
+    {
+        $object = $this->getMockForAbstractClass('QueryObject\Translator\AbstractQueryTranslator');
+        $this->assertInstanceOf('QueryObject\Translator\QueryTranslatorInterface', $object);
     }
 
     public function onQuery(QueryTranslatorEvent $event)

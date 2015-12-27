@@ -117,5 +117,16 @@ class ConditionsTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(0, $object->getFrom());
         $this->assertSame(100, $object->getTo());
+        $this->assertFalse($object->isNegation());
+    }
+
+    public function testNotBetween()
+    {
+        $object = Conditions::notBetween(self::FIELD, 0, 100);
+        $this->assertInstanceOf('QueryObject\Condition\BetweenCondition', $object);
+        $this->assertSame(self::FIELD, $object->getField());
+        $this->assertSame(0, $object->getFrom());
+        $this->assertSame(100, $object->getTo());
+        $this->assertTrue($object->isNegation());
     }
 }

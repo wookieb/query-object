@@ -17,13 +17,16 @@ class BetweenCondition implements ConditionInterface
      */
     private $to;
 
-    public function __construct($field, $from, $to)
+    private $isNegation = false;
+
+    private function __construct($field, $from, $to, $negation)
     {
         ConditionsUtil::assertFieldName($field);
 
         $this->field = $field;
         $this->from = $from;
         $this->to = $to;
+        $this->isNegation = $negation;
     }
 
     /**
@@ -50,4 +53,33 @@ class BetweenCondition implements ConditionInterface
         return $this->field;
     }
 
+    /**
+     * @return bool
+     */
+    public function isNegation()
+    {
+        return $this->isNegation;
+    }
+
+    /**
+     * @param string $field
+     * @param mixed $from
+     * @param mixed $to
+     * @return BetweenCondition
+     */
+    public static function between($field, $from, $to)
+    {
+        return new BetweenCondition($field, $from, $to, false);
+    }
+
+    /**
+     * @param string $field
+     * @param mixed $from
+     * @param mixed $to
+     * @return BetweenCondition
+     */
+    public static function notBetween($field, $from, $to)
+    {
+        return new BetweenCondition($field, $from, $to, true);
+    }
 }

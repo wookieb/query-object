@@ -11,13 +11,13 @@ class BetweenConditionTest extends ConditionTest
 
     protected function createValidCondition()
     {
-        return new BetweenCondition(self::FIELD, 0, 100);
+        return BetweenCondition::between(self::FIELD, 0, 100);
     }
 
     public function testThrowsAnExceptionIfFieldIsBlank()
     {
         $this->runTestFieldNotBlank(function () {
-            new BetweenCondition('  ', 0, 100);
+            BetweenCondition::between('  ', 0, 100);
         });
     }
 
@@ -27,5 +27,15 @@ class BetweenConditionTest extends ConditionTest
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(0, $object->getFrom());
         $this->assertSame(100, $object->getTo());
+        $this->assertFalse($object->isNegation());
+    }
+
+    public function testCreationOfNegation()
+    {
+        $object = BetweenCondition::notBetween(self::FIELD, 0, 100);
+        $this->assertSame(self::FIELD, $object->getField());
+        $this->assertSame(0, $object->getFrom());
+        $this->assertSame(100, $object->getTo());
+        $this->assertTrue($object->isNegation());
     }
 }

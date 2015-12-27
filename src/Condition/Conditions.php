@@ -102,7 +102,18 @@ class Conditions
      */
     public static function between($field, $from, $to)
     {
-        return new BetweenCondition($field, $from, $to);
+        return BetweenCondition::between($field, $from, $to);
+    }
+
+    /**
+     * @param string $field
+     * @param mixed $from
+     * @param mixed $to
+     * @return BetweenCondition
+     */
+    public static function notBetween($field, $from, $to)
+    {
+        return BetweenCondition::notBetween($field, $from, $to);
     }
 
     /**
