@@ -4,18 +4,18 @@ namespace QueryObject\Tests\Traits;
 
 
 use QueryObject\Condition\LimitCondition;
-use QueryObject\Tests\TestResources\QueryBridge;
+use QueryObject\Tests\TestResources\DummyQuery;
 
 class LimitQueryTraitTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var QueryBridge
+     * @var DummyQuery
      */
     private $object;
 
     protected function setUp()
     {
-        $this->object = new QueryBridge();
+        $this->object = new DummyQuery();
     }
 
     public function testSetting()

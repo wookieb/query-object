@@ -5,12 +5,11 @@ namespace QueryObject\Tests\TestResources;
 
 use QueryObject\Condition\ConditionInterface;
 use QueryObject\Query;
-use QueryObject\Traits\IdentifierQueryTrait;
 use QueryObject\Traits\LimitQueryTrait;
 use QueryObject\Traits\OffsetQueryTrait;
 use QueryObject\Traits\SortingQueryTrait;
 
-class QueryBridge extends Query
+class DummyQuery extends Query
 {
     use LimitQueryTrait, OffsetQueryTrait, SortingQueryTrait;
 

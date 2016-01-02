@@ -14,7 +14,7 @@ abstract class ConditionTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldImplementConditionInterface()
     {
-        $this->assertInstanceOf('QueryObject\Condition\ConditionInterface', $this->createValidCondition());
+        $this->assertInstanceOf(ConditionInterface::class, $this->createValidCondition());
     }
 
     protected function runTestFieldNotBlank(\Closure $closure)

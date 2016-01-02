@@ -5,20 +5,20 @@ namespace QueryObject\Tests\Traits;
 
 use QueryObject\Condition\SortingCondition;
 use QueryObject\Condition\SortingDefinition;
-use QueryObject\Tests\TestResources\QueryBridge;
+use QueryObject\Tests\TestResources\DummyQuery;
 
 class SortingQueryTraitTest extends \PHPUnit_Framework_TestCase
 {
     const FIELD = 'some-field';
 
     /**
-     * @var QueryBridge
+     * @var DummyQuery
      */
     private $object;
 
     protected function setUp()
     {
-        $this->object = new QueryBridge();
+        $this->object = new DummyQuery();
     }
 
     public function testSetting()

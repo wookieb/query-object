@@ -4,6 +4,7 @@ namespace QueryObject\Translator\Event;
 
 use QueryObject\Condition\ConditionInterface;
 use QueryObject\Query;
+use QueryObject\Translator\TranslationContext;
 use Symfony\Component\EventDispatcher\Event;
 
 class QueryTranslatorEvent extends Event
@@ -20,9 +21,14 @@ class QueryTranslatorEvent extends Event
      * @var ConditionInterface
      */
     private $condition;
+    /**
+     * @var TranslationContext
+     */
+    private $context;
 
-    public function __construct(Query $query, ConditionInterface $condition = null)
+    public function __construct(TranslationContext $context, Query $query, ConditionInterface $condition = null)
     {
+        $this->context = $context;
         $this->query = $query;
         $this->condition = $condition;
     }
@@ -43,6 +49,17 @@ class QueryTranslatorEvent extends Event
         return $this->condition;
     }
 
+    /**
+     * @return TranslationContext
+     */
+    public function getContext()
+    {
+        return $this->context;
+    }
+
+    /**
+     * Marks event as handled and thus stops further propagation
+     */
     public function markAsHandled()
     {
         $this->stopPropagation();

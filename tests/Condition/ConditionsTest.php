@@ -3,6 +3,7 @@
 namespace QueryObject\Tests\Condition;
 
 
+use QueryObject\Condition\BetweenCondition;
 use QueryObject\Condition\Conditions;
 use QueryObject\Condition\DefinedCondition;
 use QueryObject\Condition\PhraseCondition;
@@ -16,7 +17,7 @@ class ConditionsTest extends \PHPUnit_Framework_TestCase
     public function testEquals()
     {
         $object = Conditions::equals(self::FIELD, self::VALUE);
-        $this->assertInstanceOf('\QueryObject\Condition\SimpleOperatorCondition', $object);
+        $this->assertInstanceOf(SimpleOperatorCondition::class, $object);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::VALUE, $object->getValue());
         $this->assertTrue($object->isEqual());
@@ -25,7 +26,7 @@ class ConditionsTest extends \PHPUnit_Framework_TestCase
     public function testNotEqual()
     {
         $object = Conditions::notEqual(self::FIELD, self::VALUE);
-        $this->assertInstanceOf('\QueryObject\Condition\SimpleOperatorCondition', $object);
+        $this->assertInstanceOf(SimpleOperatorCondition::class, $object);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::VALUE, $object->getValue());
         $this->assertTrue($object->isNotEqual());
@@ -34,7 +35,7 @@ class ConditionsTest extends \PHPUnit_Framework_TestCase
     public function testGreaterThan()
     {
         $object = Conditions::greaterThan(self::FIELD, self::VALUE);
-        $this->assertInstanceOf('\QueryObject\Condition\SimpleOperatorCondition', $object);
+        $this->assertInstanceOf(SimpleOperatorCondition::class, $object);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::VALUE, $object->getValue());
         $this->assertTrue($object->isGreaterThan());
@@ -43,7 +44,7 @@ class ConditionsTest extends \PHPUnit_Framework_TestCase
     public function testGreaterThanOrEqual()
     {
         $object = Conditions::greaterThanOrEqual(self::FIELD, self::VALUE);
-        $this->assertInstanceOf('\QueryObject\Condition\SimpleOperatorCondition', $object);
+        $this->assertInstanceOf(SimpleOperatorCondition::class, $object);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::VALUE, $object->getValue());
         $this->assertTrue($object->isGreaterThanOrEqual());
@@ -52,7 +53,7 @@ class ConditionsTest extends \PHPUnit_Framework_TestCase
     public function testLessThan()
     {
         $object = Conditions::lessThan(self::FIELD, self::VALUE);
-        $this->assertInstanceOf('\QueryObject\Condition\SimpleOperatorCondition', $object);
+        $this->assertInstanceOf(SimpleOperatorCondition::class, $object);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::VALUE, $object->getValue());
         $this->assertTrue($object->isLessThan());
@@ -61,7 +62,7 @@ class ConditionsTest extends \PHPUnit_Framework_TestCase
     public function testLessThanOrEqual()
     {
         $object = Conditions::lessThanOrEqual(self::FIELD, self::VALUE);
-        $this->assertInstanceOf('\QueryObject\Condition\SimpleOperatorCondition', $object);
+        $this->assertInstanceOf(SimpleOperatorCondition::class, $object);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::VALUE, $object->getValue());
         $this->assertTrue($object->isLessThanOrEqual());
@@ -70,7 +71,7 @@ class ConditionsTest extends \PHPUnit_Framework_TestCase
     public function testStartsWith()
     {
         $object = Conditions::startsWithPhrase(self::FIELD, self::VALUE);
-        $this->assertInstanceOf('QueryObject\Condition\PhraseCondition', $object);
+        $this->assertInstanceOf(PhraseCondition::class, $object);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::VALUE, $object->getPhrase());
         $this->assertTrue($object->isStartWith());
@@ -79,7 +80,7 @@ class ConditionsTest extends \PHPUnit_Framework_TestCase
     public function testContains()
     {
         $object = Conditions::containsPhrase(self::FIELD, self::VALUE);
-        $this->assertInstanceOf('QueryObject\Condition\PhraseCondition', $object);
+        $this->assertInstanceOf(PhraseCondition::class, $object);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::VALUE, $object->getPhrase());
         $this->assertTrue($object->isContains());
@@ -88,7 +89,7 @@ class ConditionsTest extends \PHPUnit_Framework_TestCase
     public function testEndsWith()
     {
         $object = Conditions::endsWithPhrase(self::FIELD, self::VALUE);
-        $this->assertInstanceOf('QueryObject\Condition\PhraseCondition', $object);
+        $this->assertInstanceOf(PhraseCondition::class, $object);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(self::VALUE, $object->getPhrase());
         $this->assertTrue($object->isEndWith());
@@ -97,7 +98,7 @@ class ConditionsTest extends \PHPUnit_Framework_TestCase
     public function testDefined()
     {
         $object = Conditions::defined(self::FIELD);
-        $this->assertInstanceOf('QueryObject\Condition\DefinedCondition', $object);
+        $this->assertInstanceOf(DefinedCondition::class, $object);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertTrue($object->isDefined());
     }
@@ -105,7 +106,7 @@ class ConditionsTest extends \PHPUnit_Framework_TestCase
     public function testNotDefined()
     {
         $object = Conditions::notDefined(self::FIELD);
-        $this->assertInstanceOf('QueryObject\Condition\DefinedCondition', $object);
+        $this->assertInstanceOf(DefinedCondition::class, $object);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertTrue($object->isNotDefined());
     }
@@ -113,7 +114,7 @@ class ConditionsTest extends \PHPUnit_Framework_TestCase
     public function testBetween()
     {
         $object = Conditions::between(self::FIELD, 0, 100);
-        $this->assertInstanceOf('QueryObject\Condition\BetweenCondition', $object);
+        $this->assertInstanceOf(BetweenCondition::class, $object);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(0, $object->getFrom());
         $this->assertSame(100, $object->getTo());
@@ -123,7 +124,7 @@ class ConditionsTest extends \PHPUnit_Framework_TestCase
     public function testNotBetween()
     {
         $object = Conditions::notBetween(self::FIELD, 0, 100);
-        $this->assertInstanceOf('QueryObject\Condition\BetweenCondition', $object);
+        $this->assertInstanceOf(BetweenCondition::class, $object);
         $this->assertSame(self::FIELD, $object->getField());
         $this->assertSame(0, $object->getFrom());
         $this->assertSame(100, $object->getTo());

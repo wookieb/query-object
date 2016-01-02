@@ -5,12 +5,12 @@ namespace QueryObject\Tests;
 use PhpOption\None;
 use PhpOption\Some;
 use QueryObject\Condition\ConditionInterface;
-use QueryObject\Tests\TestResources\QueryBridge;
+use QueryObject\Tests\TestResources\DummyQuery;
 
 class QueryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var QueryBridge
+     * @var DummyQuery
      */
     private $object;
     /**
@@ -23,10 +23,10 @@ class QueryTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->object = new QueryBridge();
+        $this->object = new DummyQuery();
 
-        $this->condition = $this->getMockForAbstractClass('QueryObject\Condition\ConditionInterface');
-        $this->condition2 = $this->getMockForAbstractClass('QueryObject\Condition\ConditionInterface');
+        $this->condition = $this->getMockForAbstractClass(ConditionInterface::class);
+        $this->condition2 = $this->getMockForAbstractClass(ConditionInterface::class);
     }
 
     public function testAddingCondition()
@@ -77,7 +77,7 @@ class QueryTest extends \PHPUnit_Framework_TestCase
 
     public function testRemovingNotDefinedConditionThrowsAnException()
     {
-        $this->setExpectedException('\InvalidArgumentException', 'Condition "'.self::CONDITION_NAME.'" does not exist');
+        $this->setExpectedException(\InvalidArgumentException::class, 'Condition "'.self::CONDITION_NAME.'" does not exist');
 
         $this->object->removeConditionByName(self::CONDITION_NAME);
     }

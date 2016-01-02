@@ -2,8 +2,6 @@
 
 namespace QueryObject\Tests\Condition;
 
-
-use QueryObject\Condition\ConditionInterface;
 use QueryObject\Condition\PhraseCondition;
 
 class PhraseConditionTest extends ConditionTest

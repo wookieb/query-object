@@ -36,9 +36,42 @@ abstract class AbstractQueryTranslator implements QueryTranslatorInterface
         return $this->eventDispatcher;
     }
 
-    protected function translateCondition(Query $query, ConditionInterface $condition)
+    protected function runTranslation(Query $query)
     {
-        $event = $this->createTranslateConditionEvent($query, $condition);
+        $context = $this->createContext();
+        if (!$this->translateQuery($context, $query)) {
+            foreach ($query->getConditions() as $condition) {
+                if (!$context->isConditionHandled($condition)) {
+                    $this->translateCondition($context, $query, $condition);
+                }
+            }
+        }
+    }
+
+    protected function createContext()
+    {
+        return new TranslationContext();
+    }
+
+    protected function translateQuery(TranslationContext $context, Query $query)
+    {
+        $event = $this->createTranslateQueryEvent($context, $query);
+        $this->eventDispatcher->dispatch(
+            QueryTranslatorEvent::TRANSLATE_QUERY,
+            $event
+        );
+
+        return $event->isHandled();
+    }
+
+    protected function createTranslateQueryEvent(TranslationContext $context, Query $query)
+    {
+        return new QueryTranslatorEvent($context, $query);
+    }
+
+    protected function translateCondition(TranslationContext $context, Query $query, ConditionInterface $condition)
+    {
+        $event = $this->createTranslateConditionEvent($context, $query, $condition);
         $this->eventDispatcher->dispatch(
             QueryTranslatorEvent::TRANSLATE_CONDITION,
             $event
@@ -50,38 +83,15 @@ abstract class AbstractQueryTranslator implements QueryTranslatorInterface
                 get_class($condition), QueryTranslatorEvent::TRANSLATE_CONDITION
             );
             throw new QueryTranslationException($msg);
-        }
-    }
-
-    protected function createTranslateConditionEvent(Query $query, ConditionInterface $condition)
-    {
-        return new QueryTranslatorEvent($query, $condition);
-    }
-
-    protected function translateQuery(Query $query)
-    {
-        $event = $this->createTranslateQueryEvent($query);
-        $this->eventDispatcher->dispatch(
-            QueryTranslatorEvent::TRANSLATE_QUERY,
-            $event
-        );
-
-        if ($event->isHandled()) {
-            return true;
-        }
-    }
-
-    protected function createTranslateQueryEvent(Query $query)
-    {
-        return new QueryTranslatorEvent($query);
-    }
-
-    protected function runTranslation(Query $query)
-    {
-        if (!$this->translateQuery($query)) {
-            foreach ($query->getConditions() as $condition) {
-                $this->translateCondition($query, $condition);
+        } else {
+            if (!$context->isConditionHandled($condition)) {
+                $context->markConditionAsHandled($condition);
             }
         }
+    }
+
+    protected function createTranslateConditionEvent(TranslationContext $context, Query $query, ConditionInterface $condition)
+    {
+        return new QueryTranslatorEvent($context, $query, $condition);
     }
 }
